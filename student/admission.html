@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admission Request - StayNest</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" type="image/png" href="../assets/img/logo.png">
+  <style>
+    .room-type-option input:checked + div {
+      border-color: var(--accent-blue) !important;
+      background: rgba(59,130,246,0.08) !important;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .room-type-option div {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .room-type-option:hover div {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .icon-lg {
+      width: 28px;
+      height: 28px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-md {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-xl {
+      width: 48px;
+      height: 48px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.4s ease forwards; }
+  </style>
+</head>
+<body>
+<div class="auth-wrapper" style="align-items:flex-start;padding:40px 20px;">
+  <div style="width:100%;max-width:560px;margin:0 auto;">
+
+    <!-- Brand Header -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+      <div style="width:42px;height:42px;background:linear-gradient(135deg,var(--accent-blue),var(--accent-cyan));border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(59,130,246,0.3);">
+        <svg class="icon-md" viewBox="0 0 24 24" style="color:#fff;">
+          <path d="M3 9.5L12 3l9 6.5v11a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 20.5v-11z"/>
+          <path d="M9 22V12h6v10"/>
+        </svg>
+      </div>
+      <div>
+        <div style="font-size:16px;font-weight:800;color:var(--text-primary);letter-spacing:-0.5px;">StayNest</div>
+        <div style="font-size:11px;color:var(--text-muted);">Hostel Admission Portal</div>
+      </div>
+    </div>
+
+    <!-- Status Card (shown if pending) -->
+    <div id="statusCard" style="display:none;" class="card" style="margin-bottom:20px;">
+      <div class="card-top-accent"></div>
+      <div style="text-align:center;padding:24px 0;">
+        <div style="margin-bottom:16px;display:flex;justify-content:center;">
+          <svg class="icon-xl" viewBox="0 0 24 24" style="color:var(--accent-yellow);">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Application Under Review</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">Your admission request has been submitted. The admin will review your application.</div>
+        <span class="badge badge-pending">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Pending Approval
+        </span>
+        <div style="margin-top:20px;font-size:12px;color:var(--text-muted);">Submitted on: May 01, 2025</div>
+      </div>
+    </div>
+
+    <!-- Admission Form -->
+    <div class="auth-card" id="admissionForm" style="box-shadow:var(--shadow-lg);">
+      <div class="auth-title">Hostel Admission Request</div>
+      <div class="auth-subtitle">Fill in your details to apply for a hostel room</div>
+
+      <div id="alertBox"></div>
+
+      <div style="background:var(--bg-primary);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:14px;margin-bottom:20px;display:flex;align-items:center;gap:12px;">
+        <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--accent-blue),var(--accent-cyan));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:2px;">Logged in as</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text-primary);">Arif Rahman</div>
+          <div style="font-size:12px;color:var(--text-secondary);">arif@university.edu · STU-2024-0081</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Department / Faculty</label>
+        <input type="text" class="form-control" placeholder="e.g. Computer Science & Engineering" />
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Academic Year</label>
+          <select class="form-control">
+            <option value="">Select year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Semester</label>
+          <select class="form-control">
+            <option value="">Select semester</option>
+            <option>Spring 2026</option>
+            <option>Fall 2025</option>
+            <option>Summer 2025</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Preferred Room Type</label>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+          <label class="room-type-option">
+            <input type="radio" name="roomType" value="single" style="display:none;" />
+            <div style="text-align:center;padding:14px 8px;border:1px solid var(--border-color);border-radius:var(--radius-md);cursor:pointer;">
+              <div style="margin-bottom:8px;display:flex;justify-content:center;">
+                <svg class="icon-lg" viewBox="0 0 24 24" style="color:var(--accent-blue-light);">
+                  <path d="M3 9.5L12 3l9 6.5v11a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 20.5v-11z"/>
+                  <path d="M9 22V12h6v10"/>
+                </svg>
+              </div>
+              <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Single</div>
+              <div style="font-size:11px;color:var(--text-muted);">1 person</div>
+            </div>
+          </label>
+          <label class="room-type-option">
+            <input type="radio" name="roomType" value="double" style="display:none;" />
+            <div style="text-align:center;padding:14px 8px;border:1px solid var(--border-color);border-radius:var(--radius-md);cursor:pointer;">
+              <div style="margin-bottom:8px;display:flex;justify-content:center;">
+                <svg class="icon-lg" viewBox="0 0 24 24" style="color:var(--accent-cyan);">
+                  <path d="M2 4h20v16H2z"/>
+                  <path d="M2 12h20" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Double</div>
+              <div style="font-size:11px;color:var(--text-muted);">2 persons</div>
+            </div>
+          </label>
+          <label class="room-type-option">
+            <input type="radio" name="roomType" value="shared" style="display:none;" />
+            <div style="text-align:center;padding:14px 8px;border:1px solid var(--border-color);border-radius:var(--radius-md);cursor:pointer;">
+              <div style="margin-bottom:8px;display:flex;justify-content:center;">
+                <svg class="icon-lg" viewBox="0 0 24 24" style="color:var(--accent-purple);">
+                  <circle cx="9" cy="7" r="3"/>
+                  <circle cx="17" cy="7" r="3"/>
+                  <path d="M5 21v-2a4 4 0 014-4h2"/>
+                  <path d="M15 15h2a4 4 0 014 4v2"/>
+                </svg>
+              </div>
+              <div style="font-size:12px;font-weight:600;color:var(--text-primary);">Shared</div>
+              <div style="font-size:11px;color:var(--text-muted);">3-4 persons</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Preferred Floor (optional)</label>
+        <select class="form-control">
+          <option value="">No preference</option>
+          <option>Floor 1</option>
+          <option>Floor 2</option>
+          <option>Floor 3</option>
+          <option>Floor 4</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Emergency Contact Name</label>
+        <input type="text" class="form-control" placeholder="Parent / Guardian name" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Emergency Contact Phone</label>
+        <input type="tel" class="form-control" placeholder="+880 1XXX-XXXXXX" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Upload Supporting Documents</label>
+        <div class="upload-zone" onclick="document.getElementById('docs').click()">
+          <div style="margin-bottom:8px;display:flex;justify-content:center;">
+            <svg class="icon-lg" viewBox="0 0 24 24" style="color:var(--text-muted);">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <p>Admission letter, medical certificate, NID copy etc. (PDF/JPG)</p>
+          <input type="file" id="docs" style="display:none;" accept=".jpg,.jpeg,.png,.pdf" multiple />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Additional Notes</label>
+        <textarea class="form-control" placeholder="Any special requirements or notes for the admin..."></textarea>
+      </div>
+
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;" onclick="submitAdmission()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Submit Admission Request
+      </button>
+
+      <hr class="divider" />
+      <p style="text-align:center;font-size:12px;color:var(--text-muted);">
+        Already approved? <a href="dashboard.html" style="color:var(--accent-blue);text-decoration:none;font-weight:600;">Go to Dashboard</a>
+      </p>
+    </div>
+
+    <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:20px;">
+      © 2026 StayNest · All rights reserved
+    </p>
+  </div>
+</div>
+
+<script>
+function submitAdmission() {
+  const box = document.getElementById('alertBox');
+  box.innerHTML = `<div class="alert alert-success fade-up">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    Admission request submitted successfully! You will be notified once the admin reviews your application.
+  </div>`;
+  box.scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    document.getElementById('admissionForm').style.display = 'none';
+    document.getElementById('statusCard').style.display = 'block';
+    document.getElementById('statusCard').classList.add('fade-up');
+  }, 1800);
+}
+</script>
+</body>
+</html>

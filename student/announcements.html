@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Announcements - StayNest</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" type="image/png" href="../assets/img/logo.png">
+  <style>
+    .filter-btn {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .filter-btn.active-filter {
+      border-color: var(--accent-blue) !important;
+      color: var(--accent-blue-light) !important;
+      background: rgba(59,130,246,0.1) !important;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.08);
+    }
+    .ann-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .ann-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-hover);
+    }
+    .ann-card[data-priority="high"]:hover {
+      box-shadow: 0 4px 20px rgba(239, 68, 68, 0.1);
+    }
+    .ann-card[data-priority="medium"]:hover {
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.1);
+    }
+    .icon-sidebar {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-priority {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-meta {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .icon-pin {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.3s ease forwards; }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5L12 3l9 6.5v11a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 20.5v-11z"/>
+          <path d="M9 22V12h6v10"/>
+        </svg>
+      </div>
+      <div class="sidebar-brand"><div class="name">StayNest</div><div class="tag">Hostel Management</div></div>
+    </div>
+    <div class="sidebar-user">
+      <div class="s-avatar">AR</div>
+      <div><div class="s-name">Arif Rahman</div><div class="s-role">Student</div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item">
+        <span class="nav-icon"><svg class="icon-sidebar" viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5v11a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 20.5v-11z"/><path d="M9 22V12h6v10"/></svg></span>
+        <span>My Room</span>
+      </a>
+      <a href="complaints.html" class="nav-item">
+        <span class="nav-icon"><svg class="icon-sidebar" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg></span>
+        <span>Complaints</span>
+      </a>
+      <a href="room_change.html" class="nav-item">
+        <span class="nav-icon"><svg class="icon-sidebar" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg></span>
+        <span>Room Change</span>
+      </a>
+      <a href="announcements.html" class="nav-item active">
+        <span class="nav-icon"><svg class="icon-sidebar" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></span>
+        <span>Announcements</span><span class="dot"></span>
+      </a>
+      <a href="chat.html" class="nav-item">
+        <span class="nav-icon"><svg class="icon-sidebar" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+        <span>Chat</span>
+      </a>
+      <a href="profile.html" class="nav-item">
+        <span class="nav-icon"><svg class="icon-sidebar" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <span>Profile</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="main-content">
+    <nav class="navbar">
+      <div class="navbar-brand"><span class="title">Hostel Management System</span><span class="subtitle">Announcements & Notices</span></div>
+      <div class="navbar-right">
+        <div class="notif-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+          </svg>
+          <span class="notif-dot"></span>
+        </div>
+        <div class="user-chip">
+          <div class="avatar">AR</div>
+          <div class="user-info"><div class="name">Arif Rahman</div><span class="role">student</span></div>
+        </div>
+        <a href="login.html" class="logout-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <div class="page-body">
+      <div class="page-header">
+        <h1>Announcements</h1>
+        <p>Notices and updates from the hostel administration and your supervisor</p>
+      </div>
+
+      <!-- Filter -->
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+        <button class="filter-btn active-filter btn btn-secondary btn-sm" onclick="filterAnn('all',this)">
+          <svg class="icon-priority" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          All
+        </button>
+        <button class="filter-btn btn btn-secondary btn-sm" onclick="filterAnn('high',this)">
+          <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--accent-red);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          High Priority
+        </button>
+        <button class="filter-btn btn btn-secondary btn-sm" onclick="filterAnn('medium',this)">
+          <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--accent-yellow);"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 9 15 9"/><polyline points="9 13 15 13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+          Medium
+        </button>
+        <button class="filter-btn btn btn-secondary btn-sm" onclick="filterAnn('low',this)">
+          <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--text-muted);"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+          Low
+        </button>
+      </div>
+
+      <!-- Announcements List -->
+      <div style="display:flex;flex-direction:column;gap:14px;" id="annList">
+
+        <!-- High -->
+        <div class="card ann-card fade-in" data-priority="high" style="border-left:3px solid var(--accent-red);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--accent-red);flex-shrink:0;">
+                <path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/>
+              </svg>
+              <span style="font-size:15px;font-weight:700;color:var(--text-primary);">Water Supply Interruption Notice</span>
+            </div>
+            <span class="badge badge-high">
+              <svg class="icon-priority" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              high
+            </span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">
+            The hostel water supply will be suspended on <strong style="color:var(--text-primary);">May 10th from 9 AM to 1 PM</strong> due to scheduled tank cleaning and maintenance work. All residents are requested to store sufficient water for drinking, cooking, and sanitation use during this period. Buckets and containers are available at the ground floor store room upon request.
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              May 03, 2025
+            </span>
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Administration
+            </span>
+            <span class="badge badge-info" style="margin-left:auto;">
+              <svg class="icon-pin" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg>
+              Pinned
+            </span>
+          </div>
+        </div>
+
+        <!-- Medium -->
+        <div class="card ann-card fade-in" data-priority="medium" style="border-left:3px solid var(--accent-yellow);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--accent-yellow);flex-shrink:0;">
+                <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>
+                <rect x="8" y="2" width="8" height="4" rx="1"/>
+              </svg>
+              <span style="font-size:15px;font-weight:700;color:var(--text-primary);">Visitor Policy Reminder</span>
+            </div>
+            <span class="badge badge-medium">medium</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">
+            As a reminder to all residents: visitors are permitted only in the common areas (ground floor lounge) between <strong style="color:var(--text-primary);">8 AM and 9 PM</strong>. No visitors are allowed in resident rooms. All guests must sign in at the reception desk and show valid identification. Overnight guests are strictly prohibited. Violations may result in disciplinary action.
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Apr 28, 2025
+            </span>
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Supervisor Karim
+            </span>
+          </div>
+        </div>
+
+        <!-- Medium -->
+        <div class="card ann-card fade-in" data-priority="medium" style="border-left:3px solid var(--accent-yellow);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--accent-yellow);flex-shrink:0;">
+                <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+              </svg>
+              <span style="font-size:15px;font-weight:700;color:var(--text-primary);">Exam Season Quiet Hours</span>
+            </div>
+            <span class="badge badge-medium">medium</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">
+            In consideration of upcoming semester final exams, mandatory quiet hours will be enforced from <strong style="color:var(--text-primary);">10 PM to 7 AM</strong> starting May 8th through May 25th. Noise complaints during these hours will be taken seriously. The study room on Floor 3 will remain open 24 hours during exam period.
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Apr 25, 2025
+            </span>
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Administration
+            </span>
+          </div>
+        </div>
+
+        <!-- Low -->
+        <div class="card ann-card fade-in" data-priority="low" style="border-left:3px solid var(--text-muted);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--text-muted);flex-shrink:0;">
+                <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+              <span style="font-size:15px;font-weight:700;color:var(--text-primary);">Laundry Room Extended Hours</span>
+            </div>
+            <span class="badge badge-low">low</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">
+            Starting next week, the laundry room on Floor 1 will now remain open until <strong style="color:var(--text-primary);">10 PM daily</strong> (previously 8 PM). Time slot bookings for the machines can be arranged at the reception desk. Please ensure the laundry area is clean after use and do not leave unattended garments in the machines.
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Apr 22, 2025
+            </span>
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Administration
+            </span>
+          </div>
+        </div>
+
+        <!-- Low -->
+        <div class="card ann-card fade-in" data-priority="low" style="border-left:3px solid var(--text-muted);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--text-muted);flex-shrink:0;">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+              </svg>
+              <span style="font-size:15px;font-weight:700;color:var(--text-primary);">Dining Hall Menu Update</span>
+            </div>
+            <span class="badge badge-low">low</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">
+            The updated monthly dining menu for May is now posted on the notice board outside the dining hall. Breakfast is served from 7–9 AM, lunch 12–2 PM, and dinner 7–9 PM. Resident feedback forms for food quality are available at the reception desk and online.
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Apr 18, 2025
+            </span>
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Supervisor Karim
+            </span>
+          </div>
+        </div>
+
+        <!-- Low -->
+        <div class="card ann-card fade-in" data-priority="low" style="border-left:3px solid var(--text-muted);">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg class="icon-priority" viewBox="0 0 24 24" style="color:var(--text-muted);flex-shrink:0;">
+                <circle cx="12" cy="5" r="2"/><path d="M12 7v6"/><circle cx="12" cy="17" r="2"/>
+              </svg>
+              <span style="font-size:15px;font-weight:700;color:var(--text-primary);">Sports Facility Booking</span>
+            </div>
+            <span class="badge badge-low">low</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px;">
+            The indoor sports area (table tennis, badminton) is now available for booking on weekends. Book your slot by contacting the receptionist a day in advance. Maximum booking: 1 hour per session per room. Equipment available at the sports room.
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Apr 12, 2025
+            </span>
+            <span style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;">
+              <svg class="icon-meta" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Administration
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelector('.filter-btn').classList.add('active-filter');
+
+function filterAnn(priority, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active-filter'));
+  btn.classList.add('active-filter');
+  document.querySelectorAll('.ann-card').forEach(c => {
+    if (priority === 'all' || c.dataset.priority === priority) {
+      c.style.display = 'block';
+      c.style.animation = 'fadeIn 0.3s ease forwards';
+    } else {
+      c.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
