@@ -1171,3 +1171,385 @@ select.form-control {
     border-color: var(--primary-color);
 }
 
+
+/* =========================================
+   Student Profile View Styling
+   ========================================= */
+
+.btn-view {
+    background-color: #f1f5f9; 
+    color: #334155; 
+    border: 1px solid #cbd5e1;
+}
+
+.btn-view:hover {
+    background-color: #e2e8f0;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.profile-section-header {
+    border-bottom: 1px solid #e2e8f0; 
+    padding-bottom: 15px; 
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-hero {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-avatar-lg {
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    background-color: var(--primary-color); 
+    color: white; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 2rem; 
+    font-weight: 700; 
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+.profile-title h2 {
+    margin: 0 0 5px 0; 
+    font-size: 1.5rem;
+    color: whitesmoke;
+}
+
+.profile-title p {
+    margin: 0; 
+    color: #b5b5b5; 
+    font-weight: 500;
+}
+
+.profile-title .status {
+    display: inline-block; 
+    margin-top: 8px;
+}
+
+.profile-subheading {
+    color: whitesmoke; 
+    margin-bottom: 15px; 
+    font-size: 1rem;
+}
+
+.profile-info-grid {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    background-color: #141A29; 
+    padding: 20px; 
+    border-radius: 8px; 
+    border: 1px solid #e2e8f0; 
+    margin-bottom: 30px;
+}
+
+.info-item span {
+    display: block; 
+    font-size: 0.85rem; 
+    color: #64748b; 
+    margin-bottom: 4px;
+}
+
+.info-item strong {
+    color: #ffffff; 
+    font-size: 0.95rem;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.document-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 15px; 
+    margin-bottom: 30px;
+}
+
+.document-card {
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    padding: 15px; 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    background: #141A29; 
+    transition: var(--transition);
+}
+
+.document-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+
+
+.doc-info h5 {
+    margin: 0 0 3px 0; 
+    font-size: 0.9rem;
+}
+
+.doc-info a {
+    font-size: 0.8rem; 
+    color: var(--primary-color); 
+    font-weight: 600;
+}
+
+.doc-info a:hover {
+    text-decoration: underline;
+}
+
+.profile-footer {
+    border-top: 1px solid #e2e8f0; 
+    padding-top: 20px; 
+    display: flex; 
+    justify-content: flex-end;
+}
+
+/* =========================================
+   Pure CSS Master-Detail Logic (No JS)
+   ========================================= */
+
+/* 1. Hide the control inputs */
+.hidden-radio {
+    display: none;
+}
+
+/* 2. Hide all profile views by default and add a smooth fade-in */
+.profile-view {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Show specific profile view when corresponding radio is checked */
+#student-omor:checked ~ .dashboard-grid .right-container #profile-omor,
+#student-hasan:checked ~ .dashboard-grid .right-container #profile-hasan,
+#student-rafiq:checked ~ .dashboard-grid .right-container #profile-rafiq {
+    display: block;
+}
+
+/* 4. Highlight the label row when its radio is checked */
+#student-omor:checked ~ .dashboard-grid #label-omor,
+#student-hasan:checked ~ .dashboard-grid #label-hasan,
+#student-rafiq:checked ~ .dashboard-grid #label-rafiq {
+    background-color: #eff6ff;
+    border-left-color: var(--primary-color);
+}
+
+#student-omor:checked ~ .dashboard-grid #label-omor .css-td,
+#student-hasan:checked ~ .dashboard-grid #label-hasan .css-td,
+#student-rafiq:checked ~ .dashboard-grid #label-rafiq .css-td {
+    color: var(--primary-color);
+}
+
+/* 5. CSS Grid Table Setup (To allow labels as rows) */
+.css-table {
+    width: 100%;
+}
+
+.css-thead, .css-tr {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: var(--light-bg);
+}
+
+.css-th {
+    padding: 12px 15px;
+    color: #64748b;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    background-color: var(--dark-color);
+    font-weight: 600;
+}
+
+.css-tr {
+    cursor: pointer;
+    transition: var(--transition);
+    border-left: 4px solid transparent; 
+}
+
+.css-tr:hover {
+    background-color: var(--primary-color);
+}
+
+.css-td {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    color:var(--light-color);
+    display: flex;
+    align-items: center;
+}
+
+/* =========================================
+   Pure CSS Master-Detail Logic (Complaints Page)
+   ========================================= */
+
+/* Show specific complaint view when corresponding radio is checked */
+#comp-1:checked ~ .dashboard-grid .right-container #view-comp-1,
+#comp-2:checked ~ .dashboard-grid .right-container #view-comp-2,
+#comp-3:checked ~ .dashboard-grid .right-container #view-comp-3 {
+    display: block;
+}
+
+/* Highlight the complaint label row when its radio is checked */
+#comp-1:checked ~ .dashboard-grid #label-comp-1,
+#comp-2:checked ~ .dashboard-grid #label-comp-2,
+#comp-3:checked ~ .dashboard-grid #label-comp-3 {
+    background-color: #eff6ff;
+    border-left-color: var(--primary-color);
+}
+
+#comp-1:checked ~ .dashboard-grid #label-comp-1 .css-td,
+#comp-2:checked ~ .dashboard-grid #label-comp-2 .css-td,
+#comp-3:checked ~ .dashboard-grid #label-comp-3 .css-td {
+    color: var(--primary-color);
+}
+
+/* =========================================
+   Complaints & Maintenance Layout Classes
+   ========================================= */
+
+/* Utilities & Modifiers */
+.form-control-sm {
+    padding: 6px 10px;
+    width: 120px;
+}
+
+.status-sm {
+    font-size: 0.7rem;
+}
+
+.stats-row-margin {
+    margin-bottom: 30px;
+}
+
+.footer-margin {
+    margin-top: 20px;
+}
+
+/* Complaint Typography & Spacing */
+.complaint-header {
+    margin-bottom: 25px;
+}
+
+.complaint-title {
+    color:whitesmoke;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.complaint-meta {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 3px;
+}
+
+/* Complaint Detail Boxes */
+.complaint-desc-box {
+    background-color: #141A29;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 25px;
+    color:rgb(173, 173, 173);
+}
+
+.complaint-photo {
+    background-color: #585858;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(173, 173, 173);
+    font-weight: 600;
+}
+
+.complaint-update-box {
+    background-color:#141A29;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+
+/* =========================================
+   Reports & Analytics Layout Classes
+   ========================================= */
+
+/* Spacing & Flex Utilities */
+.report-section {
+    margin-bottom: 40px;
+}
+
+.flex-grow {
+    flex: 1;
+}
+
+/* Report Cards */
+.report-card-lg {
+    padding: 25px;
+}
+
+.report-title {
+    margin-bottom: 5px;
+}
+
+.report-desc {
+    font-size: 0.85rem; 
+    margin-bottom: 10px;
+}
+
+/* Forms & Tables */
+.filter-select {
+    width: 150px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.cost-value {
+    color: var(--dark-color); 
+    font-weight: 600;
+}
+
+.total-label {
+    font-size: 1.1rem;
+}
+
+.total-amount {
+    font-size: 1.2rem; 
+    color: #ef4444;
+}
+
+/* Footer Section */
+.footer-spread {
+    margin-top: 20px;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.footer-note {
+    margin: 0; 
+    font-size: 0.85rem;
+}
