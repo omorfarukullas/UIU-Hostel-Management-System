@@ -1553,3 +1553,440 @@ select.form-control {
     margin: 0; 
     font-size: 0.85rem;
 }
+
+/* =========================================
+   Supervisor Portal (supervisor-*.html)
+   ========================================= */
+
+/* Supervisor avatar — green accent */
+.sup-avatar {
+    background-color: #10b981;
+}
+
+/* ── Block Info Banner ── */
+.block-info-banner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Fix M3: wrap on narrow screens */
+    background-color: #141A29;
+    border: 1px solid #10b981;
+    border-radius: 12px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    gap: 0;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.15);
+}
+
+.block-info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 4px;
+}
+
+.block-info-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.block-info-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.block-info-divider {
+    width: 1px;
+    height: 40px;
+    background-color: #2d3748;
+}
+
+/* ── Badge count pill (box header) ── */
+.badge-count {
+    background-color: #2563eb;
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    min-width: 28px;
+    text-align: center;
+}
+
+/* Announcements page count badge — supervisor green */
+.announce-count-badge,
+#ann-count {
+    background-color: #10b981;
+}
+
+/* Supervisor dashboard grid — fixed 2-col layout */
+.sup-dash-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.sup-dash-grid .announcement-box {
+    grid-column: 1 / -1;
+}
+
+/* Stat card hover lift on dashboard */
+.dashboard-stats .stat-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+}
+
+.dashboard-stats .stat-card:hover {
+    transform: translateY(-3px);
+}
+
+/* ── Filter Bar ── */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 220px;
+    padding: 10px 15px;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background-color: #141A29;
+    color: #c0bfbf;
+    outline: none;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.filter-select {
+    padding: 10px 14px;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    background-color: #141A29;
+    color: #c0bfbf;
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition);
+    min-width: 160px; /* Fix C3: prevents collapse on narrow screens */
+}
+
+.filter-select:focus {
+    border-color: #10b981;
+}
+
+/* Filter bar label spans (Fix S4) */
+.filter-label {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.student-count-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+/* ── Full-width box ── */
+.full-width-box {
+    grid-column: 1 / -1;
+    overflow-x: auto;
+}
+
+/* ── Student name cell with mini avatar ── */
+.student-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.student-avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* ── Room badge (inline pill) ── */
+.room-badge {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: #60a5fa;
+    padding: 5px 12px; /* Fix M5: was 3px 10px — too tight */
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ── Complaint type badges ── */
+.type-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.type-badge.plumbing    { background-color: rgba(14, 165, 233, 0.15); color: #38bdf8; }
+.type-badge.electricity { background-color: rgba(245, 158, 11, 0.15);  color: #fbbf24; }
+.type-badge.cleaning    { background-color: rgba(16, 185, 129, 0.15);  color: #34d399; }
+.type-badge.noise       { background-color: rgba(239, 68, 68, 0.15);   color: #f87171; }
+.type-badge.other       { background-color: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+
+/* Description cell — truncate long text */
+.desc-cell {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+/* Status update dropdown in complaints table */
+.status-update-select {
+    padding: 6px 10px;
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+    background-color: #0b1120;
+    color: #c0bfbf;
+    font-size: 0.82rem;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+    transition: var(--transition);
+    width: 130px; /* Fix C4: fixed width, not full-width */
+}
+
+.status-update-select:focus {
+    border-color: #10b981;
+}
+
+/* ── Toast notification ── */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #10b981;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    z-index: 9999;
+    animation: slideInToast 0.3s ease;
+}
+
+@keyframes slideInToast {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Announcements Dashboard List (supervisor-dashboard) ── */
+.announcement-box .announcement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.announcement-item {
+    border-left: 3px solid #2563eb;
+    padding: 10px 14px;
+    background-color: rgba(37, 99, 235, 0.05);
+    border-radius: 0 8px 8px 0;
+    transition: var(--transition); /* Fix S2 */
+}
+
+.announcement-item:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    border-left-color: #10b981;
+}
+
+.announcement-meta {
+    margin-bottom: 4px;
+}
+
+.announcement-date {
+    font-size: 0.78rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.announcement-title {
+    font-size: 0.95rem;
+    color: white;
+    margin: 0 0 4px 0;
+}
+
+.announcement-body {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ── Announcements Page Layout ── */
+.announcement-layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .announcement-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.announce-form-box {
+    position: sticky;
+    top: 20px;
+}
+
+/* Fix C5 — form spacing via gap, not inline margin-top */
+.announce-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.announce-input {
+    background-color: #0b1120 !important;
+    color: #c0bfbf !important;
+    border-color: #2563eb !important;
+}
+
+.announce-input:focus {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+    background-color: #0b1120 !important;
+}
+
+.char-counter {
+    text-align: right;
+    font-size: 0.78rem;
+    color: #94a3b8; /* Fix S5: was #64748b — too dark against dark background */
+    margin-top: 5px;
+}
+
+.post-success-msg {
+    text-align: center;
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 12px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ── Announcement Cards (posted list) ── */
+.announcement-card {
+    background-color: #0b1120;
+    border: 1px solid #1f2937;
+    border-radius: 10px;
+    padding: 16px 18px;
+    transition: var(--transition);
+}
+
+.announcement-card:last-child {
+    margin-bottom: 0;
+}
+
+.announcement-card:hover {
+    border-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.announcement-card.new-card {
+    border-color: #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.announcement-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.ann-category-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ann-category-badge.general     { background: rgba(37, 99, 235, 0.15);   color: #60a5fa; }
+.ann-category-badge.maintenance  { background: rgba(245, 158, 11, 0.15);  color: #fbbf24; }
+.ann-category-badge.rules        { background: rgba(139, 92, 246, 0.15);  color: #a78bfa; }
+.ann-category-badge.event        { background: rgba(16, 185, 129, 0.15);  color: #34d399; }
+.ann-category-badge.urgent       { background: rgba(239, 68, 68, 0.15);   color: #f87171; }
+
+.ann-date {
+    font-size: 0.78rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.ann-card-title {
+    font-size: 0.98rem;
+    color: white;
+    margin: 0 0 6px 0;
+}
+
+.ann-card-body {
+    font-size: 0.87rem;
+    color: #94a3b8;
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+}
+
+.ann-card-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Fix M6 — Ghost-style delete button for announcements */
+.ann-delete-btn {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    background: transparent !important;
+    border: 1px solid #ef4444 !important;
+    color: #f87171 !important;
+    transition: var(--transition);
+}
+
+.ann-delete-btn:hover {
+    background: #ef4444 !important;
+    color: white !important;
+}
+
