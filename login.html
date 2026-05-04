@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - UIU Hostel Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <!-- Simplified Navbar for Auth Pages -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <h2>UIU <span>HMS</span></h2>
+        </a>
+        <a href="index.html" class="btn btn-outline">Back to Home</a>
+    </nav>
+
+    <!-- Login Section -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Welcome Back</h2>
+                <p>Please log in to your portal</p>
+            </div>
+
+            <form class="auth-form" action="#" method="POST">
+                
+                <!-- Role Selection -->
+                <div class="form-group">
+                    <label for="role">Login As</label>
+                    <select id="role" name="role" class="form-control" required>
+                        <option value="" disabled selected>Select your role</option>
+                        <option value="student">Student / Resident</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="admin">System Admin</option>
+                    </select>
+                </div>
+
+                <!-- User ID -->
+                <div class="form-group">
+                    <label for="userId">Email or Student ID</label>
+                    <input type="text" id="userId" name="userId" class="form-control" placeholder="Enter your ID or Email" required>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+
+                <!-- Options -->
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>New student? <a href="register.html">Apply for admission</a></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisor Management - UIU HMS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>UIU <span>HMS</span></h2>
+                <p>Admin Portal</p>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li><a href="admin-dashboard.html">Dashboard Overview</a></li>
+                <li><a href="admin-supervisors.html" class="active">Supervisor Management</a></li>
+                <li><a href="admin-rooms.html">Room Management</a></li>
+                <li><a href="admin-students.html">Student Admission</a></li>
+                <li><a href="#">Complaints & Costs</a></li>
+                <li><a href="#">Reports & PDF Export</a></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="logout-btn">Log Out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-main">
+            
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div>
+                    <h1>Supervisor Management</h1>
+                    <p class="date-display">Assign, reassign, and manage block supervisors.</p>
+                </div>
+                <button class="btn btn-primary" onclick="document.getElementById('add-supervisor').scrollIntoView({behavior: 'smooth'})">
+                    + Add New Supervisor
+                </button>
+            </header>
+
+            <!-- Current Supervisors Grid -->
+            <div class="dashboard-box" style="margin-bottom: 40px; background: transparent; border: none; box-shadow: none; padding: 0;">
+                <h3 style="margin-bottom: 20px;">Active Supervisors</h3>
+                <div class="supervisor-grid">
+                    
+                    <!-- Supervisor Card 1 -->
+                    <div class="supervisor-card">
+                        <div class="supervisor-header">
+                            <div class="supervisor-avatar">SI</div>
+                            <span class="badge" style="background-color: #dbeafe; color: #1d4ed8;">Block A</span>
+                        </div>
+                        <div class="supervisor-info">
+                            <h4>Shafiqul Islam</h4>
+                            <p>ID: SUP-1001</p>
+                            <p>📞 01711-000001</p>
+                        </div>
+                        <div class="supervisor-actions">
+                            <button class="btn-action approve">Reassign</button>
+                            <button class="btn-action reject">Remove</button>
+                        </div>
+                    </div>
+
+                    <!-- Supervisor Card 2 -->
+                    <div class="supervisor-card">
+                        <div class="supervisor-header">
+                            <div class="supervisor-avatar" style="background-color: #10b981;">KR</div>
+                            <span class="badge" style="background-color: #dcfce3; color: #166534;">Block B</span>
+                        </div>
+                        <div class="supervisor-info">
+                            <h4>Kamal Rahman</h4>
+                            <p>ID: SUP-1002</p>
+                            <p>📞 01811-000002</p>
+                        </div>
+                        <div class="supervisor-actions">
+                            <button class="btn-action approve">Reassign</button>
+                            <button class="btn-action reject">Remove</button>
+                        </div>
+                    </div>
+
+                    <!-- Supervisor Card 3 -->
+                    <div class="supervisor-card">
+                        <div class="supervisor-header">
+                            <div class="supervisor-avatar" style="background-color: #f59e0b;">MA</div>
+                            <span class="badge" style="background-color: #fef3c7; color: #b45309;">Block C</span>
+                        </div>
+                        <div class="supervisor-info">
+                            <h4>Md. Ali</h4>
+                            <p>ID: SUP-1003</p>
+                            <p>📞 01911-000003</p>
+                        </div>
+                        <div class="supervisor-actions">
+                            <button class="btn-action approve">Reassign</button>
+                            <button class="btn-action reject">Remove</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Add New Supervisor Form -->
+            <div id="add-supervisor" class="dashboard-box">
+                <div class="box-header" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 25px;">
+                    <h3>Add New Supervisor</h3>
+                    <p class="text-muted" style="font-size: 0.85rem; color: #64748b;">Register a new supervisor and assign them to a block.</p>
+                </div>
+                
+                <form class="auth-form" action="#" method="POST">
+                    <div class="form-grid">
+                        <!-- Full Name -->
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" class="form-control" placeholder="e.g. Rafiqul Hasan" required>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="01XXX XXXXXX" required>
+                        </div>
+
+                        <!-- Assign Block -->
+                        <div class="form-group">
+                            <label for="block">Assign to Block</label>
+                            <select id="block" class="form-control" required>
+                                <option value="" disabled selected>Select a Block...</option>
+                                <option value="block_a">Block A (Premium)</option>
+                                <option value="block_b">Block B (Standard)</option>
+                                <option value="block_c">Block C (Economy)</option>
+                            </select>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="supervisor@uiu.ac.bd" required>
+                        </div>
+                    </div>
+
+                    <!-- File Uploads (Photo & NID) -->
+                    <div class="form-grid" style="margin-top: 15px;">
+                        <div class="form-group file-upload-group">
+                            <label for="photoUpload">Upload Supervisor Photo</label>
+                            <input type="file" id="photoUpload" class="form-control file-input" accept="image/jpeg, image/png" required>
+                        </div>
+
+                        <div class="form-group file-upload-group">
+                            <label for="nidUpload">Upload NID Document</label>
+                            <input type="file" id="nidUpload" class="form-control file-input" accept=".pdf, image/jpeg, image/png" required>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div style="margin-top: 25px; text-align: right;">
+                        <button type="submit" class="btn btn-primary">Create Supervisor Account</button>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
