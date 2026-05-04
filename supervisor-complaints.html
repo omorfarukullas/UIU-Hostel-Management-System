@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Management - UIU Hostel Management System</title>
+    <meta name="description" content="View and update complaint statuses for students in your block — UIU HMS Supervisor Portal.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>UIU <span>HMS</span></h2>
+                <p>Supervisor Portal</p>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="supervisor-dashboard.html">🏠 Dashboard Overview</a></li>
+                <li><a href="supervisor-students.html">👥 My Block Students</a></li>
+                <li><a href="supervisor-complaints.html" class="active">📋 Complaints</a></li>
+                <li><a href="supervisor-announcements.html">📢 Announcements</a></li>
+            </ul>
+            <div class="sidebar-bottom">
+                <a href="login.html" class="logout-btn">Log Out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+
+            <header class="dashboard-header">
+                <div>
+                    <h1>Block A — Complaints</h1>
+                    <p class="date-display">Update complaint statuses for your block students</p>
+                </div>
+                <div class="admin-profile">
+                    <div class="avatar sup-avatar">SR</div>
+                    <span>Block A Supervisor</span>
+                </div>
+            </header>
+
+            <!-- Summary Cards -->
+            <div class="dashboard-stats">
+                <div class="stat-card danger">
+                    <div class="stat-title">Pending</div>
+                    <div class="stat-value" id="count-pending">4</div>
+                </div>
+                <div class="stat-card vacant">
+                    <div class="stat-title">In Progress</div>
+                    <div class="stat-value" id="count-inprogress">2</div>
+                </div>
+                <div class="stat-card occupied">
+                    <div class="stat-title">Resolved</div>
+                    <div class="stat-value" id="count-resolved">5</div>
+                </div>
+                <div class="stat-card neutral">
+                    <div class="stat-title">Total</div>
+                    <div class="stat-value" id="count-total">11</div>
+                </div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <input type="text" id="complaint-search" class="search-input" placeholder="🔍  Search by room, subject, or type…" oninput="filterComplaints()">
+                <span class="filter-label">Type:</span>
+                <select id="type-filter" class="filter-select" onchange="filterComplaints()">
+                    <option value="">All Types</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Electricity">Electricity</option>
+                    <option value="Cleaning">Cleaning</option>
+                    <option value="Noise">Noise</option>
+                    <option value="Other">Other</option>
+                </select>
+                <span class="filter-label">Status:</span>
+                <select id="status-filter" class="filter-select" onchange="filterComplaints()">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+            </div>
+
+            <!-- Complaints Table -->
+            <div class="dashboard-box full-width-box">
+                <div class="box-header">
+                    <h3>All Block Complaints</h3>
+                </div>
+                <table class="data-table" id="complaints-table">
+                    <thead>
+                        <tr>
+                            <th>Room</th>
+                            <th>Student</th>
+                            <th>Type</th>
+                            <th>Subject</th>
+                            <th>Description</th>
+                            <th>Cost (BDT)</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody id="complaints-tbody">
+                        <tr data-type="Plumbing" data-status="Pending" data-room="A-101" data-subject="Pipe Leak">
+                            <td><span class="room-badge">A-101</span></td>
+                            <td>Riya Akter</td>
+                            <td><span class="type-badge plumbing">Plumbing</span></td>
+                            <td>Pipe Leak</td>
+                            <td class="desc-cell" title="Water dripping from ceiling near bathroom">Water dripping from ceiling near bathroom</td>
+                            <td>1,500</td>
+                            <td><span class="status pending">Pending</span></td>
+                            <td>
+                                <select class="status-update-select" onchange="updateStatus(this)" id="update-1">
+                                    <option value="Pending" selected>Pending</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr data-type="Electricity" data-status="In Progress" data-room="A-204" data-subject="Fan not working">
+                            <td><span class="room-badge">A-204</span></td>
+                            <td>Farhan Islam</td>
+                            <td><span class="type-badge electricity">Electricity</span></td>
+                            <td>Fan not working</td>
+                            <td class="desc-cell" title="Ceiling fan stopped working completely">Ceiling fan stopped working completely</td>
+                            <td>800</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                            <td>
+                                <select class="status-update-select" onchange="updateStatus(this)" id="update-2">
+                                    <option value="Pending">Pending</option>
+                                    <option value="In Progress" selected>In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr data-type="Cleaning" data-status="Resolved" data-room="A-310" data-subject="Bathroom dirty">
+                            <td><span class="room-badge">A-310</span></td>
+                            <td>Nadia Hasan</td>
+                            <td><span class="type-badge cleaning">Cleaning</span></td>
+                            <td>Bathroom dirty</td>
+                            <td class="desc-cell" title="Shared bathroom not cleaned for a week">Shared bathroom not cleaned for a week</td>
+                            <td>0</td>
+                            <td><span class="status resolved">Resolved</span></td>
+                            <td>
+                                <select class="status-update-select" onchange="updateStatus(this)" id="update-3">
+                                    <option value="Pending">Pending</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Resolved" selected>Resolved</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr data-type="Noise" data-status="Pending" data-room="A-105" data-subject="Loud noise at night">
+                            <td><span class="room-badge">A-105</span></td>
+                            <td>Sadia Sultana</td>
+                            <td><span class="type-badge noise">Noise</span></td>
+                            <td>Loud noise at night</td>
+                            <td class="desc-cell" title="Adjacent room students play music loudly after 11 PM">Adjacent room students play music loudly after 11 PM</td>
+                            <td>0</td>
+                            <td><span class="status pending">Pending</span></td>
+                            <td>
+                                <select class="status-update-select" onchange="updateStatus(this)" id="update-4">
+                                    <option value="Pending" selected>Pending</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr data-type="Electricity" data-status="Pending" data-room="A-402" data-subject="Power outlet broken">
+                            <td><span class="room-badge">A-402</span></td>
+                            <td>Hasibul Islam</td>
+                            <td><span class="type-badge electricity">Electricity</span></td>
+                            <td>Power outlet broken</td>
+                            <td class="desc-cell" title="One of the two power outlets near the desk is sparking">One of the two power outlets near the desk is sparking</td>
+                            <td>600</td>
+                            <td><span class="status pending">Pending</span></td>
+                            <td>
+                                <select class="status-update-select" onchange="updateStatus(this)" id="update-5">
+                                    <option value="Pending" selected>Pending</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr data-type="Plumbing" data-status="In Progress" data-room="A-206" data-subject="Blocked drain">
+                            <td><span class="room-badge">A-206</span></td>
+                            <td>Mahim Hossain</td>
+                            <td><span class="type-badge plumbing">Plumbing</span></td>
+                            <td>Blocked drain</td>
+                            <td class="desc-cell" title="Drain in bathroom is blocked, water not draining">Drain in bathroom is blocked, water not draining</td>
+                            <td>500</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                            <td>
+                                <select class="status-update-select" onchange="updateStatus(this)" id="update-6">
+                                    <option value="Pending">Pending</option>
+                                    <option value="In Progress" selected>In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr data-type="Cleaning" data-status="Resolved" data-room="A-309" data-subject="Dustbin overflow">
+                            <td><span class="room-badge">A-309</span></td>
+                            <td>Tasnima Begum</td>
+                            <td><span class="type-badge cleaning">Cleaning</span></td>
+                            <td>Dustbin overflow</td>
+                            <td class="desc-cell" title="Common area dustbin was not emptied for 3 days">Common area dustbin was not emptied for 3 days</td>
+                            <td>0</td>
+                            <td><span class="status resolved">Resolved</span></td>
+                            <td>
+                                <select class="status-update-select" onchange="updateStatus(this)" id="update-7">
+                                    <option value="Pending">Pending</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Resolved" selected>Resolved</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="no-results-row" style="display:none;">
+                            <td colspan="8" style="text-align:center; padding:30px; color:#64748b;">
+                                🔍 No complaints match your current filter. Try adjusting the search or filters.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Toast notification -->
+            <div id="toast" class="toast" style="display:none;">Status updated successfully!</div>
+
+        </main>
+    </div>
+
+    <script>
+        function updateStatus(selectEl) {
+            const newStatus = selectEl.value;
+            const row = selectEl.closest('tr');
+
+            // Update badge in status column (7th column, index 6)
+            const statusCell = row.cells[6];
+            const classMap = {
+                'Pending': 'pending',
+                'In Progress': 'in-progress',
+                'Resolved': 'resolved'
+            };
+            statusCell.innerHTML = `<span class="status ${classMap[newStatus]}">${newStatus}</span>`;
+
+            // Update data attribute for filtering
+            row.dataset.status = newStatus;
+
+            // Refresh counts
+            updateCounts();
+
+            // Show toast
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        }
+
+        function updateCounts() {
+            const rows = document.querySelectorAll('#complaints-tbody tr');
+            let pending = 0, inProgress = 0, resolved = 0;
+            rows.forEach(row => {
+                const s = row.dataset.status;
+                if (s === 'Pending') pending++;
+                else if (s === 'In Progress') inProgress++;
+                else if (s === 'Resolved') resolved++;
+            });
+            document.getElementById('count-pending').textContent = pending;
+            document.getElementById('count-inprogress').textContent = inProgress;
+            document.getElementById('count-resolved').textContent = resolved;
+            document.getElementById('count-total').textContent = rows.length;
+        }
+
+        function filterComplaints() {
+            const query = document.getElementById('complaint-search').value.toLowerCase();
+            const typeFilter = document.getElementById('type-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+            const rows = document.querySelectorAll('#complaints-tbody tr');
+            let visible = 0;
+
+            rows.forEach(row => {
+                const room = row.dataset.room.toLowerCase();
+                const subject = row.dataset.subject.toLowerCase();
+                const type = row.dataset.type;
+                const status = row.dataset.status;
+
+                const matchSearch = room.includes(query) || subject.includes(query) || type.toLowerCase().includes(query);
+                const matchType = typeFilter === '' || type === typeFilter;
+                const matchStatus = statusFilter === '' || status === statusFilter;
+
+                row.style.display = (matchSearch && matchType && matchStatus) ? '' : 'none';
+                if (matchSearch && matchType && matchStatus) visible++;
+            });
+
+            document.getElementById('no-results-row').style.display = visible === 0 ? '' : 'none';
+        }
+    </script>
+
+</body>
+</html>
