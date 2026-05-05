@@ -24,12 +24,12 @@
                 <p>Please log in to your portal</p>
             </div>
 
-            <form class="auth-form" action="#" method="POST">
-                
+            <form class="auth-form" onsubmit="handleLogin(event)">
+
                 <!-- Role Selection -->
                 <div class="form-group">
                     <label for="role">Login As</label>
-                    <select id="role" name="role" class="form-control" required>
+                    <select id="role" name="role" class="form-control" required onchange="clearError()">
                         <option value="" disabled selected>Select your role</option>
                         <option value="student">Student / Resident</option>
                         <option value="supervisor">Supervisor</option>
@@ -40,13 +40,13 @@
                 <!-- User ID -->
                 <div class="form-group">
                     <label for="userId">Email or Student ID</label>
-                    <input type="text" id="userId" name="userId" class="form-control" placeholder="Enter your ID or Email" required>
+                    <input type="text" id="userId" name="userId" class="form-control" placeholder="Enter your ID or Email">
                 </div>
 
                 <!-- Password -->
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
                 </div>
 
                 <!-- Options -->
@@ -58,14 +58,41 @@
                 </div>
 
                 <!-- Submit -->
-                <button type="submit" class="btn btn-primary btn-full">Login</button>
+                <button type="submit" class="btn btn-primary btn-full">Login →</button>
+                <p id="login-error" style="display:none; color:#ef4444; text-align:center; font-size:0.88rem; margin-top:10px; background:rgba(239,68,68,0.08); padding:8px; border-radius:6px;">⚠ Please select a role to continue.</p>
             </form>
 
             <div class="auth-footer">
                 <p>New student? <a href="register.html">Apply for admission</a></p>
             </div>
         </div>
+
+
     </div>
+
+    <script>
+        const roleRedirects = {
+            student:    'student-dashboard.html',
+            supervisor: 'supervisor-dashboard.html',
+            admin:      'admin-dashboard.html'
+        };
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const role = document.getElementById('role').value;
+            if (!role) {
+                document.getElementById('login-error').style.display = 'block';
+                document.getElementById('role').focus();
+                return;
+            }
+            clearError();
+            window.location.href = roleRedirects[role];
+        }
+
+        function clearError() {
+            document.getElementById('login-error').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>

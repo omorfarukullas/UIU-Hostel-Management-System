@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisor Dashboard - UIU Hostel Management System</title>
+    <meta name="description" content="Supervisor dashboard for UIU HMS — manage your block, complaints, room-change requests and announcements.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>UIU <span>HMS</span></h2>
+                <p>Supervisor Portal</p>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li><a href="supervisor-dashboard.html" class="active">🏠 Dashboard Overview</a></li>
+                <li><a href="supervisor-students.html">👥 My Block Students</a></li>
+                <li><a href="supervisor-complaints.html">📋 Complaints</a></li>
+                <li><a href="supervisor-announcements.html">📢 Announcements</a></li>
+            </ul>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="logout-btn">Log Out</a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-main">
+
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div>
+                    <h1>Welcome, Supervisor Rahman</h1>
+                    <p class="date-display" id="current-date">Loading date...</p>
+                </div>
+                <div class="admin-profile">
+                    <div class="avatar sup-avatar">SR</div>
+                    <span>Block A Supervisor</span>
+                </div>
+            </header>
+
+            <!-- Block Info Banner -->
+            <div class="block-info-banner">
+                <div class="block-info-item">
+                    <span class="block-info-label">Assigned Block</span>
+                    <span class="block-info-value">Block A</span>
+                </div>
+                <div class="block-info-divider"></div>
+                <div class="block-info-item">
+                    <span class="block-info-label">Total Rooms</span>
+                    <span class="block-info-value">30</span>
+                </div>
+                <div class="block-info-divider"></div>
+                <div class="block-info-item">
+                    <span class="block-info-label">Total Students</span>
+                    <span class="block-info-value">58</span>
+                </div>
+                <div class="block-info-divider"></div>
+                <div class="block-info-item">
+                    <span class="block-info-label">Floor Range</span>
+                    <span class="block-info-value">1 – 5</span>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-stats">
+                <div class="stat-card danger">
+                    <div class="stat-title">Pending Complaints</div>
+                    <div class="stat-value">4</div>
+                </div>
+                <div class="stat-card vacant">
+                    <div class="stat-title">In Progress</div>
+                    <div class="stat-value">2</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Room Change Requests</div>
+                    <div class="stat-value">3</div>
+                </div>
+                <div class="stat-card occupied">
+                    <div class="stat-title">Resolved This Month</div>
+                    <div class="stat-value">11</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid sup-dash-grid">
+
+                <!-- Pending Room Change Requests -->
+                <div class="dashboard-box">
+                    <div class="box-header">
+                        <h3>Pending Room Change Requests</h3>
+                        <span class="badge-count">3</span>
+                    </div>
+                    <table class="data-table" id="room-change-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Current Room</th>
+                                <th>Reason</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Riya Akter</td>
+                                <td>A-102</td>
+                                <td>Noise issues</td>
+                            <td>
+                                    <div class="action-btn-group">
+                                        <button class="btn-action approve" onclick="handleRoomChange(this, 'approved')">Approve</button>
+                                        <button class="btn-action reject" onclick="handleRoomChange(this, 'rejected')">Reject</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Farhan Islam</td>
+                                <td>A-205</td>
+                                <td>Medical condition</td>
+                            <td>
+                                    <div class="action-btn-group">
+                                        <button class="btn-action approve" onclick="handleRoomChange(this, 'approved')">Approve</button>
+                                        <button class="btn-action reject" onclick="handleRoomChange(this, 'rejected')">Reject</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nadia Hasan</td>
+                                <td>A-308</td>
+                                <td>Wants single room</td>
+                            <td>
+                                    <div class="action-btn-group">
+                                        <button class="btn-action approve" onclick="handleRoomChange(this, 'approved')">Approve</button>
+                                        <button class="btn-action reject" onclick="handleRoomChange(this, 'rejected')">Reject</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="room-change-empty-row" style="display:none;">
+                                <td colspan="4" style="text-align:center; padding:30px; color:#64748b;">
+                                    🎉 All caught up! No pending room change requests right now.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Complaint Summary -->
+                <div class="dashboard-box">
+                    <div class="box-header">
+                        <h3>Recent Complaints</h3>
+                        <a href="supervisor-complaints.html" class="btn-link">View All</a>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Room</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A-101</td>
+                                <td><span class="type-badge plumbing">Plumbing</span></td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>A-204</td>
+                                <td><span class="type-badge electricity">Electricity</span></td>
+                                <td><span class="status in-progress">In Progress</span></td>
+                            </tr>
+                            <tr>
+                                <td>A-310</td>
+                                <td><span class="type-badge cleaning">Cleaning</span></td>
+                                <td><span class="status resolved">Resolved</span></td>
+                            </tr>
+                            <tr>
+                                <td>A-105</td>
+                                <td><span class="type-badge noise">Noise</span></td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Recent Announcements -->
+                <div class="dashboard-box announcement-box">
+                    <div class="box-header">
+                        <h3>My Recent Announcements</h3>
+                        <a href="supervisor-announcements.html" class="btn-link">Post New</a>
+                    </div>
+                    <div class="announcement-list">
+                        <div class="announcement-item">
+                            <div class="announcement-meta">
+                                <span class="announcement-date">May 3, 2026</span>
+                            </div>
+                            <h4 class="announcement-title">Water Supply Interruption – May 4</h4>
+                            <p class="announcement-body">Water supply will be off from 9 AM to 1 PM on May 4 for pipe maintenance. Please store water in advance.</p>
+                        </div>
+                        <div class="announcement-item">
+                            <div class="announcement-meta">
+                                <span class="announcement-date">Apr 29, 2026</span>
+                            </div>
+                            <h4 class="announcement-title">Hostel Cleanliness Drive</h4>
+                            <p class="announcement-body">All students must ensure their rooms are cleaned before the monthly inspection on May 1.</p>
+                        </div>
+                        <div class="announcement-item">
+                            <div class="announcement-meta">
+                                <span class="announcement-date">Apr 20, 2026</span>
+                            </div>
+                            <h4 class="announcement-title">Gate Curfew Reminder</h4>
+                            <p class="announcement-body">Reminder that the hostel gate closes at 10 PM. No entry allowed after this time without prior permission.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End Dashboard Grid -->
+
+        </main>
+    </div>
+
+    <script>
+        // Live date display
+        const dateEl = document.getElementById('current-date');
+        const now = new Date();
+        dateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        // Handle room-change approve/reject
+        function handleRoomChange(btn, action) {
+            const row = btn.closest('tr');
+            const studentName = row.cells[0].textContent;
+            const actionCell = row.cells[3];
+
+            if (action === 'approved') {
+                actionCell.innerHTML = '<span class="status resolved">Approved</span>';
+            } else {
+                actionCell.innerHTML = '<span class="status pending">Rejected</span>';
+            }
+
+            // Visual feedback
+            row.style.opacity = '0.6';
+
+            // Check if all are handled
+            checkRoomChangeEmptyState();
+        }
+
+        function checkRoomChangeEmptyState() {
+            const table = document.getElementById('room-change-table');
+            const tbody = table.querySelector('tbody');
+            const rows = tbody.querySelectorAll('tr');
+            
+            // Count rows that don't have opacity changed (meaning they haven't been acted upon)
+            let pendingCount = 0;
+            rows.forEach(r => {
+                if (r.style.opacity !== '0.6') {
+                    pendingCount++;
+                }
+            });
+
+            // Update badge count
+            const headerBadge = table.previousElementSibling.querySelector('.badge-count');
+            if (headerBadge) {
+                headerBadge.textContent = pendingCount;
+            }
+
+            // Show empty state if none pending
+            if (pendingCount === 0) {
+                document.getElementById('room-change-empty-row').style.display = '';
+                tbody.style.display = 'none'; // Hide empty tbody
+            }
+        }
+    </script>
+
+</body>
+</html>
