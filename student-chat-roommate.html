@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Roommate - UIU Hostel Management System</title>
+    <meta name="description" content="Chat privately with your roommate — UIU HMS Student Portal.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="dashboard-wrapper">
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>UIU <span>HMS</span></h2>
+            <p>Student Portal</p>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="student-dashboard.html">🏠 Dashboard Overview</a></li>
+            <li><a href="student-complaints.html">📋 My Complaints</a></li>
+            <li><a href="student-room-change.html">🔄 Room Change Request</a></li>
+            <li><a href="student-announcements.html">📢 Announcements</a></li>
+            <li><a href="student-chat-supervisor.html">💬 Chat with Supervisor</a></li>
+            <li><a href="student-chat-roommate.html" class="active">🛏️ Chat with Roommate</a></li>
+        </ul>
+        <div class="sidebar-bottom">
+            <a href="login.html" class="logout-btn">Log Out</a>
+        </div>
+    </aside>
+
+    <main class="dashboard-main" style="padding:30px 40px;">
+
+        <header class="dashboard-header" style="margin-bottom:20px;">
+            <div>
+                <h1>Chat with Roommate</h1>
+                <p class="date-display">Private conversation with your roommate in Room A-205</p>
+            </div>
+            <div class="admin-profile">
+                <div class="avatar stu-avatar">AF</div>
+                <span>Room A-205</span>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container dashboard-box" style="padding:0;">
+
+            <!-- Chat Header -->
+            <div class="chat-header-bar roommate-chat-header">
+                <div class="chat-header-left">
+                    <div class="avatar stu-avatar" style="width:44px;height:44px;font-size:1rem;">SR</div>
+                    <div class="chat-header-info">
+                        <h4>Sakib Rahman</h4>
+                        <span class="chat-online-dot roommate-dot"></span>
+                        <span class="chat-status-text">Your Roommate · Room A-205</span>
+                    </div>
+                </div>
+                <div class="chat-header-right">
+                    <span class="chat-tag roommate-tag">🛏️ Roommate Chat</span>
+                </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="chat-messages" id="room-messages">
+
+                <!-- Received -->
+                <div class="chat-msg-row received">
+                    <div class="msg-avatar stu-avatar-sm">SR</div>
+                    <div class="msg-column">
+                        <div class="msg-bubble msg-received-roommate">Hey! Just moved in. Are you around?</div>
+                        <span class="msg-time">Apr 10, 3:00 PM</span>
+                    </div>
+                </div>
+
+                <!-- Sent -->
+                <div class="chat-msg-row sent">
+                    <div class="msg-column">
+                        <div class="msg-bubble msg-sent">Yes! Welcome! I'm Ahmed, your roommate. Nice to meet you 👋</div>
+                        <span class="msg-time msg-time-right">Apr 10, 3:05 PM</span>
+                    </div>
+                </div>
+
+                <!-- Received -->
+                <div class="chat-msg-row received">
+                    <div class="msg-avatar stu-avatar-sm">SR</div>
+                    <div class="msg-column">
+                        <div class="msg-bubble msg-received-roommate">Nice to meet you too! Which side of the room do you prefer?</div>
+                        <span class="msg-time">Apr 10, 3:07 PM</span>
+                    </div>
+                </div>
+
+                <!-- Sent -->
+                <div class="chat-msg-row sent">
+                    <div class="msg-column">
+                        <div class="msg-bubble msg-sent">I'll take the left side near the window if that's ok with you 😄</div>
+                        <span class="msg-time msg-time-right">Apr 10, 3:10 PM</span>
+                    </div>
+                </div>
+
+                <!-- Received -->
+                <div class="chat-msg-row received">
+                    <div class="msg-avatar stu-avatar-sm">SR</div>
+                    <div class="msg-column">
+                        <div class="msg-bubble msg-received-roommate">Sure, no problem! By the way, I usually study late. Hope that won't be an issue?</div>
+                        <span class="msg-time">Apr 10, 3:12 PM</span>
+                    </div>
+                </div>
+
+                <!-- Sent -->
+                <div class="chat-msg-row sent">
+                    <div class="msg-column">
+                        <div class="msg-bubble msg-sent">Not at all! I'm a night owl too. We'll get along just fine 🙂</div>
+                        <span class="msg-time msg-time-right">Apr 10, 3:15 PM</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Input Bar -->
+            <div class="chat-input-bar">
+                <textarea id="room-input" class="chat-textarea" placeholder="Type a message to your roommate…" rows="1" oninput="autoGrow(this); toggleSend('room-send', this.value)" onkeydown="handleEnter(event, 'room-messages', 'room-input', 'room-send')"></textarea>
+                <button class="chat-send-btn roommate-send-btn" id="room-send" disabled onclick="sendMessage('room-messages', 'room-input', 'room-send')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </div>
+
+        </div><!-- end chat-container -->
+    </main>
+</div>
+
+<script>
+    function autoGrow(el) {
+        el.style.height = 'auto';
+        el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+    }
+
+    function toggleSend(btnId, value) {
+        document.getElementById(btnId).disabled = value.trim() === '';
+    }
+
+    function handleEnter(e, messagesId, inputId, sendId) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage(messagesId, inputId, sendId);
+        }
+    }
+
+    function sendMessage(messagesId, inputId, sendId) {
+        const input = document.getElementById(inputId);
+        const text  = input.value.trim();
+        if (!text) return;
+
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+
+        const row = document.createElement('div');
+        row.className = 'chat-msg-row sent';
+        row.innerHTML = `<div class="msg-column"><div class="msg-bubble msg-sent">${escapeHtml(text)}</div><span class="msg-time msg-time-right">Now ${timeStr}</span></div>`;
+
+        const msgs = document.getElementById(messagesId);
+        msgs.appendChild(row);
+        msgs.scrollTop = msgs.scrollHeight;
+
+        input.value = '';
+        input.style.height = 'auto';
+        document.getElementById(sendId).disabled = true;
+    }
+
+    function escapeHtml(str) {
+        const d = document.createElement('div');
+        d.appendChild(document.createTextNode(str));
+        return d.innerHTML;
+    }
+
+    window.addEventListener('load', () => {
+        const msgs = document.getElementById('room-messages');
+        if (msgs) msgs.scrollTop = msgs.scrollHeight;
+    });
+</script>
+</body>
+</html>
