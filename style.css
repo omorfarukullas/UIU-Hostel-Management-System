@@ -2435,3 +2435,353 @@ select.form-control {
         height: calc(100vh - 160px);
     }
 }
+
+/* =========================================
+   Phase 4 — New Shared CSS Additions
+   ========================================= */
+
+/* ── Modal System ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(3px);
+}
+
+.modal-overlay.active {
+    display: flex;
+    animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-box {
+    background-color: #141A29;
+    border: 1px solid #1f2937;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 88vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    animation: modalSlideUp 0.25s ease;
+    scrollbar-width: thin;
+    scrollbar-color: #2563eb #141A29;
+}
+
+.modal-box-wide {
+    max-width: 720px;
+}
+
+@keyframes modalSlideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #1f2937;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: white;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    transition: color 0.15s ease;
+}
+
+.modal-close-btn:hover {
+    color: #ef4444;
+}
+
+.modal-body {
+    padding: 20px 24px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid #1f2937;
+}
+
+.modal-action-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid #1f2937;
+    background-color: #0b1120;
+    border-radius: 0 0 14px 14px;
+}
+
+/* ── Modal Detail Grid ── */
+.modal-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.modal-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.modal-detail-label {
+    font-size: 0.75rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.modal-detail-value {
+    font-size: 0.92rem;
+    color: #c0bfbf;
+    font-weight: 500;
+}
+
+/* ── Notes Textarea ── */
+.notes-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ── Priority Badges ── */
+.priority-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.priority-badge.urgent { background: rgba(239, 68, 68, 0.15);  color: #f87171; }
+.priority-badge.normal { background: rgba(37, 99, 235, 0.15);  color: #60a5fa; }
+.priority-badge.low    { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+
+/* ── Admin Supervisor: student count badge text ── */
+.sup-student-count {
+    font-size: 0.82rem;
+    margin: 2px 0 0 0 !important;
+}
+
+/* ── Roommate Doc List (modal grid) ── */
+.roommate-doc-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+/* ── Announcement Card — Unread State ── */
+.announcement-card.unread {
+    border-left: 4px solid #2563eb;
+    background-color: rgba(37, 99, 235, 0.07);
+    cursor: pointer;
+}
+
+.announcement-card.unread:hover {
+    border-left-color: #10b981;
+    background-color: rgba(37, 99, 235, 0.12);
+}
+
+/* ── Unread Badge (header pill) ── */
+.unread-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 12px;
+    border-radius: 20px;
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+/* ── Nav Notification Dot (sidebar) ── */
+.nav-notif-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 10px;
+    background-color: #ef4444;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-left: 8px;
+    line-height: 1;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* ── Messenger Layout ── */
+.messenger-layout {
+    display: flex;
+    gap: 0;
+    flex: 1;
+    min-height: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #1f2937;
+    height: calc(100vh - 220px);
+    min-height: 500px;
+}
+
+/* ── Contact List Panel ── */
+.contact-list-panel {
+    width: 280px;
+    flex-shrink: 0;
+    background-color: #0b1120;
+    border-right: 1px solid #1f2937;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #2563eb #0b1120;
+}
+
+.contact-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px 14px;
+    border-bottom: 1px solid #1f2937;
+    flex-shrink: 0;
+}
+
+.contact-list-header h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+/* ── Contact Item ── */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background-color 0.15s ease;
+}
+
+.contact-item:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.contact-item.active {
+    background-color: rgba(37, 99, 235, 0.12);
+    border-left: 3px solid #2563eb;
+}
+
+.contact-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-name {
+    font-size: 0.92rem;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-preview {
+    font-size: 0.8rem;
+    color: #64748b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.contact-time {
+    font-size: 0.72rem;
+    color: #475569;
+    white-space: nowrap;
+}
+
+.contact-unread-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #8b5cf6;
+    flex-shrink: 0;
+}
+
+/* ── Responsive: messenger layout on small screens ── */
+@media (max-width: 900px) {
+    .messenger-layout {
+        flex-direction: column;
+        height: auto;
+        min-height: 80vh;
+    }
+    .contact-list-panel {
+        width: 100%;
+        max-height: 200px;
+        border-right: none;
+        border-bottom: 1px solid #1f2937;
+    }
+    .roommate-doc-list {
+        grid-template-columns: 1fr;
+    }
+    .modal-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}

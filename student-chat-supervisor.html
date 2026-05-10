@@ -18,7 +18,11 @@
             <li><a href="student-dashboard.html">🏠 Dashboard Overview</a></li>
             <li><a href="student-complaints.html">📋 My Complaints</a></li>
             <li><a href="student-room-change.html">🔄 Room Change Request</a></li>
-            <li><a href="student-announcements.html">📢 Announcements</a></li>
+            <li>
+                <a href="student-announcements.html">📢 Announcements
+                    <span class="nav-notif-dot" id="ann-notif-dot" style="display:none;"></span>
+                </a>
+            </li>
             <li><a href="student-chat-supervisor.html" class="active">💬 Chat with Supervisor</a></li>
             <li><a href="student-chat-roommate.html">🛏️ Chat with Roommate</a></li>
         </ul>
@@ -119,6 +123,13 @@
 </div>
 
 <script>
+    // Sidebar unread badge
+    (function() {
+        const readIds = JSON.parse(localStorage.getItem('hms_read_ann') || '[]');
+        const unread  = 5 - readIds.length;
+        const dot     = document.getElementById('ann-notif-dot');
+        if (dot && unread > 0) { dot.style.display = 'inline-flex'; dot.textContent = unread; }
+    })();
     function autoGrow(el) {
         el.style.height = 'auto';
         el.style.height = Math.min(el.scrollHeight, 120) + 'px';

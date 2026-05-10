@@ -22,7 +22,11 @@
                 <li><a href="student-dashboard.html" class="active">🏠 Dashboard Overview</a></li>
                 <li><a href="student-complaints.html">📋 My Complaints</a></li>
                 <li><a href="student-room-change.html">🔄 Room Change Request</a></li>
-                <li><a href="student-announcements.html">📢 Announcements</a></li>
+                <li>
+                    <a href="student-announcements.html">📢 Announcements
+                        <span class="nav-notif-dot" id="ann-notif-dot" style="display:none;"></span>
+                    </a>
+                </li>
                 <li><a href="student-chat-supervisor.html">💬 Chat with Supervisor</a></li>
                 <li><a href="student-chat-roommate.html">🛏️ Chat with Roommate</a></li>
             </ul>
@@ -93,53 +97,36 @@
             <!-- Dashboard Grid -->
             <div class="dashboard-grid stu-dash-grid">
 
-                <!-- Roommate Info Box -->
+                <!-- Roommate Info Box — compact table -->
                 <div class="dashboard-box">
                     <div class="box-header">
                         <h3>My Roommate</h3>
                         <a href="student-chat-roommate.html" class="btn-link">Chat →</a>
                     </div>
-                    <div class="roommate-card">
-                        <div class="roommate-card-top">
-                            <div class="roommate-avatar">SR</div>
-                            <div class="roommate-info">
-                                <h4>Sakib Rahman</h4>
-                                <p>Student ID: 011201456</p>
-                                <p>Department: CSE</p>
-                            </div>
-                        </div>
-                        <div class="roommate-details">
-                            <div class="roommate-detail-item">
-                                <span class="roommate-detail-label">Phone</span>
-                                <span class="roommate-detail-value">+880 1712-345678</span>
-                            </div>
-                            <div class="roommate-detail-item">
-                                <span class="roommate-detail-label">Email</span>
-                                <span class="roommate-detail-value">sakib@uiu.ac.bd</span>
-                            </div>
-                            <div class="roommate-detail-item">
-                                <span class="roommate-detail-label">Batch</span>
-                                <span class="roommate-detail-value">53rd</span>
-                            </div>
-                        </div>
-                        <div class="roommate-docs">
-                            <p class="roommate-docs-label">Submitted Documents</p>
-                            <div class="stu-doc-list">
-                                <a href="#" class="stu-doc-item">
-                                    <span class="stu-doc-icon">📄</span>
-                                    <span>National ID Card</span>
-                                </a>
-                                <a href="#" class="stu-doc-item">
-                                    <span class="stu-doc-icon">📄</span>
-                                    <span>Student ID Card</span>
-                                </a>
-                                <a href="#" class="stu-doc-item">
-                                    <span class="stu-doc-icon">📄</span>
-                                    <span>Parent/Guardian ID</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Name</th>
+                                <th>Student ID</th>
+                                <th>Department</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="roommate-avatar" style="width:36px;height:36px;font-size:0.85rem;">SR</div>
+                                </td>
+                                <td style="color:white;font-weight:500;">Sakib Rahman</td>
+                                <td>011201456</td>
+                                <td>CSE</td>
+                                <td>
+                                    <button class="btn-action approve" onclick="openRoommateModal()">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <!-- My Recent Complaints -->
@@ -216,11 +203,109 @@
         </main>
     </div>
 
+    <!-- ── Roommate Detail Modal ── -->
+    <div class="modal-overlay" id="roommate-modal-overlay" onclick="closeRoommateModal(event)">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="roommate-modal-title">
+            <div class="modal-header">
+                <h3 id="roommate-modal-title">Roommate Profile</h3>
+                <button class="modal-close-btn" onclick="closeRoommateModal()" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+                    <div class="roommate-avatar" style="width:60px;height:60px;font-size:1.4rem;">SR</div>
+                    <div>
+                        <h4 style="margin:0 0 4px 0;font-size:1.1rem;color:white;">Sakib Rahman</h4>
+                        <span style="font-size:0.85rem;color:#94a3b8;">Room A-205 · Block A</span>
+                    </div>
+                </div>
+                <div class="modal-detail-grid">
+                    <div class="modal-detail-item">
+                        <span class="modal-detail-label">Student ID</span>
+                        <span class="modal-detail-value">011201456</span>
+                    </div>
+                    <div class="modal-detail-item">
+                        <span class="modal-detail-label">Department</span>
+                        <span class="modal-detail-value">CSE</span>
+                    </div>
+                    <div class="modal-detail-item">
+                        <span class="modal-detail-label">Phone</span>
+                        <span class="modal-detail-value">+880 1712-345678</span>
+                    </div>
+                    <div class="modal-detail-item">
+                        <span class="modal-detail-label">Email</span>
+                        <span class="modal-detail-value">sakib@uiu.ac.bd</span>
+                    </div>
+                    <div class="modal-detail-item">
+                        <span class="modal-detail-label">Batch</span>
+                        <span class="modal-detail-value">53rd</span>
+                    </div>
+                    <div class="modal-detail-item">
+                        <span class="modal-detail-label">Joined</span>
+                        <span class="modal-detail-value">Jan 2024</span>
+                    </div>
+                </div>
+
+                <!-- Documents Section -->
+                <div style="border-top:1px solid #1f2937;padding-top:16px;margin-top:16px;">
+                    <p class="roommate-docs-label" style="margin-bottom:12px;">Submitted Documents</p>
+                    <div class="roommate-doc-list">
+                        <a href="#" class="stu-doc-item">
+                            <span class="stu-doc-icon">📄</span>
+                            <span>National ID Card</span>
+                        </a>
+                        <a href="#" class="stu-doc-item">
+                            <span class="stu-doc-icon">📄</span>
+                            <span>Student ID Card</span>
+                        </a>
+                        <a href="#" class="stu-doc-item">
+                            <span class="stu-doc-icon">📄</span>
+                            <span>Parent / Guardian ID</span>
+                        </a>
+                        <a href="#" class="stu-doc-item">
+                            <span class="stu-doc-icon">📄</span>
+                            <span>Medical Certificate</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="closeRoommateModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Live date display
         const dateEl = document.getElementById('current-date');
         const now = new Date();
         dateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        // Roommate modal
+        function openRoommateModal() {
+            document.getElementById('roommate-modal-overlay').classList.add('active');
+        }
+        function closeRoommateModal(e) {
+            if (e && e.target !== document.getElementById('roommate-modal-overlay')) return;
+            document.getElementById('roommate-modal-overlay').classList.remove('active');
+        }
+
+        // ── Announcement unread badge on sidebar ──
+        (function initSidebarBadge() {
+            const TOTAL_ANN = 5;
+            const readIds   = JSON.parse(localStorage.getItem('hms_read_ann') || '[]');
+            const unread    = TOTAL_ANN - readIds.length;
+            const dot       = document.getElementById('ann-notif-dot');
+            if (dot && unread > 0) {
+                dot.style.display = 'inline-flex';
+                dot.textContent   = unread;
+            }
+        })();
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(el => el.classList.remove('active'));
+            }
+        });
     </script>
 
 </body>
